@@ -35,12 +35,9 @@ steps_by_day <- summarise(steps_by_day, total = sum(steps))
 
 ``` r
 #### Plot the histogram with ignored NA values.
-
-hist(steps_by_day$total,col = "grey",main="Histogram of total number of steps per day", 
-     xlab="Total number of steps in a day")
 ```
 
-![](PA1_template_files/figure-markdown_github/plot1-1.png)
+hist(steps\_by\_day$total,col = "grey",main="Histogram of total number of steps per day", xlab="Total number of steps in a day")
 
 3. What is mean total number of steps taken per day?
 ====================================================
@@ -69,13 +66,9 @@ Median =  10765
 
 ``` r
 steps_by_interval <- aggregate(steps ~ interval, activityData_NArm, mean)
-
-plot(steps_by_interval$interval,steps_by_interval$steps, type='l', 
-     main="Average number of steps over all days", xlab="Interval", 
-     ylab="Average number of steps")
 ```
 
-![](PA1_template_files/figure-markdown_github/plot2-1.png)
+plot(steps\_by\_interval*i**n**t**e**r**v**a**l*, *s**t**e**p**s*<sub>*b*</sub>*y*<sub>*i*</sub>*n**t**e**r**v**a**l*steps, type='l', main="Average number of steps over all days", xlab="Interval", ylab="Average number of steps")
 
 5 . The 5-minute interval that, on average, contains the maximum number of steps
 ================================================================================
@@ -133,12 +126,9 @@ head(D,5)
 ``` r
 #### Plot the histogram after replacing the NA values
 imputed_steps_by_day <- aggregate(steps ~ date, D, sum)
-
-hist(imputed_steps_by_day$steps,col="light blue", main="Histogram of total number of steps per day (imputed)", 
-     xlab="Total number of steps in a day")
 ```
 
-![](PA1_template_files/figure-markdown_github/plot3-1.png)
+hist(imputed\_steps\_by\_day$steps,col="light blue", main="Histogram of total number of steps per day (imputed)", xlab="Total number of steps in a day")
 
 #### Let's compare how the results of Mean & Median are before & after replacing NA values.
 
@@ -181,18 +171,9 @@ D$type_of_day[D$type_of_day != "weekend"] <- "weekday"
 D$type_of_day <- as.factor(D$type_of_day)
 
 imputed_steps_by_interval <- aggregate(steps ~ interval + type_of_day, D, mean)
-
-qplot(interval, 
-      steps, 
-      data = imputed_steps_by_interval, 
-      geom=c("line"),
-      xlab = "Interval", 
-      ylab = "Number of steps", 
-      main = "") +
-  facet_wrap(~ type_of_day, ncol = 1)+geom_line(color = "light blue", size = 1) 
 ```
 
-![](PA1_template_files/figure-markdown_github/plot4-1.png)
+qplot(interval, steps, data = imputed\_steps\_by\_interval, geom=c("line"), xlab = "Interval", ylab = "Number of steps", main = "") + facet\_wrap(~ type\_of\_day, ncol = 1)+geom\_line(color = "light blue", size = 1)
 
 ``` r
 #### Generate .RD file using 
