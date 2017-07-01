@@ -44,6 +44,14 @@ steps_by_day <- summarise(steps_by_day, total = sum(steps))
 
 #### **Histogram** ####
 
+
+```r
+#### Plot the histogram with ignored NA values.
+
+hist(steps_by_day$total,col = "grey",main="Histogram of total number of steps per day", 
+     xlab="Total number of steps in a day")
+```
+
 ![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-1.png)
 
 # 3. What is mean total number of steps taken per day? #
@@ -72,6 +80,15 @@ Median =  10765
 ```
 
 # 4 . Time series plot of the average number of steps taken
+
+
+```r
+steps_by_interval <- aggregate(steps ~ interval, activityData_NArm, mean)
+
+plot(steps_by_interval$interval,steps_by_interval$steps, type='l', 
+     main="Average number of steps over all days", xlab="Interval", 
+     ylab="Average number of steps")
+```
 
 ![plot of chunk unnamed-chunk-7](figure/unnamed-chunk-7-1.png)
 
@@ -134,7 +151,17 @@ head(D,5)
 
 # 7. Histogram of the total number of steps taken each day after missing values are imputed
 
+
+```r
+#### Plot the histogram after replacing the NA values
+imputed_steps_by_day <- aggregate(steps ~ date, D, sum)
+
+hist(imputed_steps_by_day$steps,col="light blue", main="Histogram of total number of steps per day (imputed)", 
+     xlab="Total number of steps in a day")
+```
+
 ![plot of chunk unnamed-chunk-11](figure/unnamed-chunk-11-1.png)
+
 
 #### Let's compare how the results of Mean & Median are before & after replacing NA values.
 
@@ -175,6 +202,26 @@ median(steps_by_day$total)
 **Mean values stays the same but therer is slight difference in meadian value**
 
 # 8 . Panel plot comparing the average number of steps taken per 5-minute interval across weekdays and weekends
+
+
+```r
+D['type_of_day'] <- weekdays(as.Date(D$date))
+D$type_of_day[D$type_of_day  %in% c('Saturday','Sunday') ] <- "weekend"
+D$type_of_day[D$type_of_day != "weekend"] <- "weekday"
+
+D$type_of_day <- as.factor(D$type_of_day)
+
+imputed_steps_by_interval <- aggregate(steps ~ interval + type_of_day, D, mean)
+
+qplot(interval, 
+      steps, 
+      data = imputed_steps_by_interval, 
+      geom=c("line"),
+      xlab = "Interval", 
+      ylab = "Number of steps", 
+      main = "") +
+  facet_wrap(~ type_of_day, ncol = 1)+geom_line(color = "light blue", size = 1) 
+```
 
 ![plot of chunk unnamed-chunk-13](figure/unnamed-chunk-13-1.png)
 
