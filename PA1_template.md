@@ -52,7 +52,7 @@ hist(steps_by_day$total,col = "grey",main="Histogram of total number of steps pe
      xlab="Total number of steps in a day")
 ```
 
-![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-1.png)
+![plot of chunk plot1](figure/plot1-1.png)
 
 # 3. What is mean total number of steps taken per day? #
 
@@ -90,7 +90,7 @@ plot(steps_by_interval$interval,steps_by_interval$steps, type='l',
      ylab="Average number of steps")
 ```
 
-![plot of chunk unnamed-chunk-8](figure/unnamed-chunk-8-1.png)
+![plot of chunk plot2](figure/plot2-1.png)
 
 # 5 . The 5-minute interval that, on average, contains the maximum number of steps
 
@@ -160,7 +160,7 @@ hist(imputed_steps_by_day$steps,col="light blue", main="Histogram of total numbe
      xlab="Total number of steps in a day")
 ```
 
-![plot of chunk unnamed-chunk-12](figure/unnamed-chunk-12-1.png)
+![plot of chunk plot3](figure/plot3-1.png)
 
 
 #### Let's compare how the results of Mean & Median are before & after replacing NA values.
@@ -223,7 +223,7 @@ qplot(interval,
   facet_wrap(~ type_of_day, ncol = 1)+geom_line(color = "light blue", size = 1) 
 ```
 
-![plot of chunk unnamed-chunk-14](figure/unnamed-chunk-14-1.png)
+![plot of chunk plot4](figure/plot4-1.png)
 
 
 ```r
